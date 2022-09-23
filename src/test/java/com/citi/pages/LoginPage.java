@@ -4,7 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class LoginPage {
+import com.citi.base.AutomationKeywords;
+
+public class LoginPage extends AutomationKeywords {
 	
 	private By usernameLocator=By.id("authUser");
 	private By passwordLocator=By.cssSelector("#clearPass");
@@ -16,17 +18,18 @@ public class LoginPage {
 	
 	public LoginPage(WebDriver driver)
 	{
+		super(driver);
 		this.driver=driver;
 	}
 		
 	public void enterUsername(String username)
 	{
-		driver.findElement(usernameLocator).sendKeys(username);
+		typeOnTextBox(usernameLocator, username);
 	}
 
 	public void enterPassword(String password)
 	{
-		driver.findElement(passwordLocator).sendKeys(password);
+		typeOnTextBox(passwordLocator, password);
 	}
 	
 	public void selectLanguageByText(String language)
@@ -37,12 +40,12 @@ public class LoginPage {
 	
 	public void clickOnLogin()
 	{
-		driver.findElement(loginLocator).click();
+		clickElement(loginLocator);
 	}
 	
 	public String getInvalidErrorMessage()
 	{
-		return driver.findElement(errorLocator).getText();
+		return getTextFromElement(errorLocator);
 	}
 	
 }
